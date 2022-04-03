@@ -1,3 +1,10 @@
+<?php
+session_start();
+
+if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
+{
+    ?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -42,7 +49,7 @@
                 <li class="nav-item">
                   <a href="#" class="nav-link">Settings</a>
                 </li>
-                <li class="nav-item"><a href="#" class="nav-link">Logout</a></li>
+                <li class="nav-item"><a href="logout.php" class="nav-link">Logout</a></li>
               </ul>
             </div>
         </nav>   
@@ -50,7 +57,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12" id="collection-heading">
-                        <h1  style= "text-align: center;" >Current Listings</h1>
+                        <h1  style= "text-align: center;" >Hello <?php echo $_SESSION['Name']; ?>!</h1>
                         <br>
                     </div>
                 </div>
@@ -243,3 +250,13 @@
         </div>
     </body>
 </html>
+
+    <?php
+
+}
+else
+{
+    header("Location: index.php");
+    exit();
+}
+?>

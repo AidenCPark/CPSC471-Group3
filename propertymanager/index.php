@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Login Page</title>
+        <title>Log In</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
@@ -35,27 +35,35 @@
           font-family: 'Signika', sans-serif;
           box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
         "
+        action="login.php" method="post"
       >
         <img src="imgs/PMLOGO.PNG" width="60%" alt="" />
         <br />
         <br />
+
+        <?php if(isset($_GET['error'])) { ?>
+          <p class="error"> <?php echo $_GET['error']; ?></p>
+        <?php } ?>
+
         <div class="form-group">
-          <label for="username">Enter Username:</label>
+          <label for="Username">Enter Username:</label>
           <br />
           <input
             type="text"
-            name="username"
-            placeholder="Enter Username"
+            name="Username"
+            id="Username"
+            placeholder="Username"
             class="form-control"
           />
         </div>
         <div class="form-group">
-          <label for="password">Enter Password:</label>
+          <label for="Password">Enter Password:</label>
           <br />
           <input
             type="password"
-            name="password"
-            placeholder="Enter Password"
+            name="Password"
+            id="Password"
+            placeholder="Password"
             class="form-control"
           />
         </div>

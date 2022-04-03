@@ -90,7 +90,7 @@
             <div>
                 </br>
                 <div class="col text-center">
-                    <button type='submit' name='submit' id="submit" class="btn btn-primary btn-rounded">Sign Up</button>
+                    <button type='submit' name='SignUp' id="SignUp" class="btn btn-primary btn-rounded">Sign Up</button>
                 </div>
             </div>
           </form>

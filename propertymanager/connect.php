@@ -1,6 +1,6 @@
 <?php
     // Connection for the Sign Up form:
-    if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit']))
+    if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['SignUp']))
     {
         // Connect to database: return error if can't connect
         $conn= mysqli_connect('localhost', 'root', '', 'propertymanager') or die("Connection Failed:" .mysqli_connect_error());
@@ -38,6 +38,18 @@
     }
     else
     {
-        echo 'Error: There is something wrong with your submit button';
+        // Used for non-signup-form db connection:
+        // Could probably use the code above for this but i'm still a php noob
+        $sname = "localhost";
+        $uname = "root";
+        $password = "";
+        $db_name = "propertymanager";
+
+        $conn = mysqli_connect($sname, $uname, $password, $db_name);
+
+        if(!$conn)
+        {
+            echo "Connection failed";
+        }
     }
 ?>
