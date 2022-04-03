@@ -22,7 +22,9 @@
             $query = mysqli_query($conn,$sql);
             if($query)
             {
-                echo 'Entry Successful';
+                // Redirect to the login page
+                header("Location: index.php");
+                exit();
             }
             else
             {
