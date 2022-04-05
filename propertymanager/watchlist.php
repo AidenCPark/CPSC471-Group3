@@ -33,16 +33,17 @@
         </button>
         <div class="collapse navbar-collapse" id="mynav">
           <ul class="navbar-nav ml-auto">
+            <li class="nav-item"><a href="listings.php" class="nav-link">Listings</a></li>
             <li class="nav-item">
-              <a href="#" class="nav-link">Search Properties</a>
+                <a href="searchprop.php" class="nav-link">Search Properties</a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">My Watchlist</a>
+              <a href="watchlist.php" class="nav-link">My Watchlist</a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">Settings</a>
+              <a href="settings.php" class="nav-link">Settings</a>
             </li>
-            <li class="nav-item"><a href="#" class="nav-link">Logout</a></li>
+            <li class="nav-item"><a href="logout.php" class="nav-link">Logout</a></li>
           </ul>
         </div>
     </nav>
