@@ -16,7 +16,7 @@
             $Type= $_POST['Type'];
 
             // Put this information in an SQL query (using the api endpoint 'call user_add' I made rather than a long query):
-            $sql= "INSERT INTO `person` (`Name`, `Email`, `Phone`, `Username`, `Password`, `Type`) VALUES ('$Name', '$Email', '$Phone', '$Username', '$Password', '$Type')";
+            $sql= "CALL user_add('$Name', '$Email', '$Phone', '$Username', '$Password', '$Type')";
 
             // Send this query to the database, return a message for if it was successful or not
             $query = mysqli_query($conn,$sql);

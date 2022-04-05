@@ -24,7 +24,7 @@ else if(empty($Password))
     exit();
 }
 
-$sql = "SELECT * FROM person WHERE Username='$Username' AND Password='$Password'";
+$sql = "CALL user_select('$Username','$Password')";
 
 $result = mysqli_query($conn, $sql);
 
