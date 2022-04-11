@@ -1,0 +1,75 @@
+DELIMITER $$
+CREATE PROCEDURE `appointment`()
+SELECT * FROM appointment$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `appointment_add`(IN `clientid` INT, IN `realtorid` INT, IN `date` VARCHAR(255))
+INSERT INTO appointment (ClientID, RealtorID, Date) VALUES (clientid, realtorid, date)$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `appointment_client`(IN `id` INT)
+SELECT * FROM appointment WHERE ClientID = id$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `appointment_date`(IN `date` VARCHAR(255))
+SELECT * FROM appointment WHERE Date = date$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `appointment_realtor`(IN `id` INT)
+SELECT * FROM appointment WHERE RealtorID = id$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `property`()
+SELECT * FROM property$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `property_add`(IN `realtorid` INT, IN `address` VARCHAR(255), IN `price` INT, IN `style` VARCHAR(255), IN `status` VARCHAR(255), IN `numoffloors` INT, IN `numofbedrooms` INT, IN `numofbathrooms` INT)
+INSERT INTO property (RealtorID,Address,Price,Style,Status,NumOfFloors,NumOfBedrooms,NumOfBathrooms) VALUES (realtorid,address,price,style,status,numoffloors,numofbedrooms,numofbathrooms)$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `property_get`(IN `id` INT)
+SELECT * FROM property WHERE PropertyID = id$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `property_update`(IN `id` INT, IN `realtorid` INT, IN `address` VARCHAR(255), IN `price` INT, IN `style` VARCHAR(255), IN `status` VARCHAR(255), IN `numoffloors` INT, IN `numofbedrooms` INT, IN `numofbathrooms` INT)
+UPDATE property SET RealtorID = realtorid, Address = address, Price = price, Style = style, Status = status, NumOfFloors = numoffloors, NumOfBedrooms = numofbedrooms, NumOfBathrooms = numofbathrooms WHERE PropertyID = id$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `user`()
+SELECT * FROM person$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `user_add`(IN `name` VARCHAR(255), IN `email` VARCHAR(255), IN `phone` VARCHAR(255), IN `username` VARCHAR(255), IN `password` VARCHAR(255), IN `type` VARCHAR(255))
+INSERT INTO person (Name,Email,Phone,Username,Password,Type) VALUES (name,email,phone,username,password,type)$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `user_get`(IN `id` INT)
+SELECT * FROM person WHERE UserID = id$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `user_pw`(IN `id` INT)
+SELECT Password FROM person WHERE UserID = id$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `user_select`(IN `un` VARCHAR(255), IN `pw` VARCHAR(255))
+SELECT * FROM person WHERE Username=un AND Password=pw$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `user_un`(IN `id` INT)
+SELECT Username FROM person WHERE UserID = id$$
+DELIMITER ;
+
