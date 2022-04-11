@@ -1,3 +1,11 @@
+<!-- Check if logged in, and get user info if so -->
+<?php
+session_start();
+
+if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
+{
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -18,38 +26,45 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </head>
     <nav class="navbar navbar-light bg-light sticky-top navbar-expand-lg">
-        <a class="navbar-brand" href="#">
-            <img src="imgs/PMLOGO.PNG" width="30" height="30" class="d-inline-block align-top" alt="">
-            Property Manager
-          </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#mynav"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="mynav">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a href="#" class="nav-link">Search Properties</a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">My Watchlist</a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">Settings</a>
-            </li>
-            <li class="nav-item"><a href="#" class="nav-link">Logout</a></li>
-          </ul>
-        </div>
-    </nav>
+            <a class="navbar-brand" href="listings.php">
+                <img src="imgs/PMLOGO.PNG" width="30" height="30" class="d-inline-block align-top" alt="">
+                Property Manager
+              </a>
+            <button
+              class="navbar-toggler"
+              type="button"
+              data-toggle="collapse"
+              data-target="#mynav"
+            >
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mynav">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <a href="searchprop.php" class="nav-link">Search Properties</a>
+                </li>
+                <li class="nav-item">
+                  <a href="watchlist.php" class="nav-link">My Watchlist</a>
+                </li>
+
+                <?php if ($_SESSION['Type'] == 'Realtor'): ?>
+                <li class="nav-item">
+                <a href="listprop.php" class="nav-link">List New Property</a>
+                </li>
+                <?php endif ?>
+
+                <li class="nav-item">
+                  <a href="settings.php" class="nav-link">Settings</a>
+                </li>
+                <li class="nav-item"><a href="logout.php" class="nav-link">Logout</a></li>
+              </ul>
+            </div>
+        </nav>   
     <body>
         <h2 class="text-center">Create Property Listing</h2>
         <div class="container" style="font-family: 'Signika', sans-serif">
           <form
-            action="create_listing"
+            action="connect.php"
             method="POST"
             style="
               padding: 5%;
@@ -58,33 +73,34 @@
             "
           >
             <img src="imgs/PMLOGO.PNG" width="10%" alt="" class="rounded mx-auto d-block" />
+
             <div class="form-group row">
-                <label for="Item">Address</label>
-                <input type="text" name="Title" class="form-control">
+                <label for="Address">Address</label>
+                <input type="text" name="Address" id="Address" class="form-control" required>
             </div>
             <div class="form-group row">
-                <label for="Item">Description</label>
-                <input type="text" name="Title" class="form-control">
+                <label for="Price">Price ($)</label>
+                <input type="number" name="Price" id="Price" class="form-control" required>
             </div>
             <div class="form-group row">
-                <label for="Item">Broker Name</label>
-                <input type="text" name="Title" class="form-control">
+                <label for="Style">Style</label>
+                <input type="text" name="Style" id="Style" class="form-control" required>
             </div>
             <div class="form-group row">
-                <label for="Brand">Price ($)</label>
-                <input type="text" name="Brand" class="form-control">
+                <label for="Status">Status</label>
+                <input type="text" name="Status" id="Status" class="form-control" required>
             </div>
             <div class="form-group row">
-                <label for="Category"># of Bedrooms</label>
-                <input type="text" name="Category" class="form-control">
+                <label for="NumOfFloors">Number of Floors</label>
+                <input type="number" name="NumOfFloors" id="NumOfFloors" class="form-control" required>
             </div>
             <div class="form-group row">
-                <label for="Gender"># of Bathrooms</label>
-                <input type="text" name="Gender" class="form-control">
+                <label for="NumOfBedrooms">Number of Bedrooms</label>
+                <input type="number" name="NumOfBedrooms" id="NumOfBedrooms" class="form-control" required>
             </div>
             <div class="form-group row">
-                <label for="Size">Property Type</label>
-                <input type="text" name="Size" class="form-control">
+                <label for="NumOfBathrooms">Number of Bathrooms</label>
+                <input type="number" name="NumOfBathrooms" id="NumOfBathrooms" class="form-control" required>
             </div>
                 </br>
                 <div class="col text-center">
@@ -92,9 +108,19 @@
                 </div>
                 </br>
                 <div class="col text-center">
-                    <button class="btn btn-primary btn-rounded">List Property</button>
+                    <button type='sumbit' name='ListProp' id='ListProp' class="btn btn-primary btn-rounded">List Property</button>
                 </div>
             </div>
           </form>
     </body>
-</html>    
+</html>   
+
+<!-- If not logged in, return to the index page -->
+<?php
+}
+else
+{
+    header("Location: index.php");
+    exit();
+}
+?>

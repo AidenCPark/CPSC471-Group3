@@ -1,3 +1,11 @@
+<!-- Check if logged in, and get user info if so -->
+<?php
+session_start();
+
+if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
+{
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -19,7 +27,7 @@
         <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
     </head>
     <nav class="navbar navbar-light bg-light sticky-top navbar-expand-lg">
-        <a class="navbar-brand" href="#">
+        <a class="navbar-brand" href="listings.php">
             <img src="imgs/PMLOGO.PNG" width="30" height="30" class="d-inline-block align-top" alt="">
             Property Manager
           </a>
@@ -33,13 +41,19 @@
         </button>
         <div class="collapse navbar-collapse" id="mynav">
           <ul class="navbar-nav ml-auto">
-            <li class="nav-item"><a href="listings.php" class="nav-link">Listings</a></li>
             <li class="nav-item">
                 <a href="searchprop.php" class="nav-link">Search Properties</a>
             </li>
             <li class="nav-item">
               <a href="watchlist.php" class="nav-link">My Watchlist</a>
             </li>
+
+            <?php if ($_SESSION['Type'] == 'Realtor'): ?>
+            <li class="nav-item">
+            <a href="listprop.php" class="nav-link">List New Property</a>
+            </li>
+            <?php endif ?>
+
             <li class="nav-item">
               <a href="settings.php" class="nav-link">Settings</a>
             </li>
@@ -188,3 +202,13 @@
         </div>
      </body>
 </html>   
+
+<!-- If not logged in, return to the index page -->
+<?php
+}
+else
+{
+    header("Location: index.php");
+    exit();
+}
+?>

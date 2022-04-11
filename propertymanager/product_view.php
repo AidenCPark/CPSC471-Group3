@@ -1,3 +1,11 @@
+<!-- Check if logged in, and get user info if so -->
+<?php
+session_start();
+
+if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
+{
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -38,6 +46,13 @@
             <li class="nav-item">
               <a href="#" class="nav-link">My Watchlist</a>
             </li>
+
+            <?php if ($_SESSION['Type'] == 'Realtor'): ?>
+            <li class="nav-item">
+            <a href="listprop.php" class="nav-link">List New Property</a>
+            </li>
+            <?php endif ?>
+
             <li class="nav-item">
               <a href="#" class="nav-link">Settings</a>
             </li>
@@ -107,3 +122,13 @@
       </div>
 </body>
 </html>   
+
+<!-- If not logged in, return to the index page -->
+<?php
+}
+else
+{
+    header("Location: index.php");
+    exit();
+}
+?>

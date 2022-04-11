@@ -1,9 +1,10 @@
+<!-- Check if logged in, and get user info if so -->
 <?php
 session_start();
 
 if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
 {
-    ?>
+?>
 
 <!DOCTYPE html>
 <html>
@@ -26,7 +27,7 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
     </head>
     <body>
         <nav class="navbar navbar-light bg-light sticky-top navbar-expand-lg">
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="listings.php">
                 <img src="imgs/PMLOGO.PNG" width="30" height="30" class="d-inline-block align-top" alt="">
                 Property Manager
               </a>
@@ -46,6 +47,13 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
                 <li class="nav-item">
                   <a href="watchlist.php" class="nav-link">My Watchlist</a>
                 </li>
+
+                <?php if ($_SESSION['Type'] == 'Realtor'): ?>
+                <li class="nav-item">
+                <a href="listprop.php" class="nav-link">List New Property</a>
+                </li>
+                <?php endif ?>
+
                 <li class="nav-item">
                   <a href="settings.php" class="nav-link">Settings</a>
                 </li>
@@ -251,8 +259,8 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
     </body>
 </html>
 
-    <?php
-
+<!-- If not logged in, return to the index page -->
+<?php
 }
 else
 {

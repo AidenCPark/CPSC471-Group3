@@ -53,7 +53,7 @@
             name="Username"
             id="Username"
             placeholder="Username"
-            class="form-control"
+            class="form-control" required
           />
         </div>
         <div class="form-group">
@@ -64,7 +64,7 @@
             name="Password"
             id="Password"
             placeholder="Password"
-            class="form-control"
+            class="form-control" required
           />
         </div>
         <input type="submit" value="Log In" class="btn btn-primary" />
