@@ -91,8 +91,17 @@
                 </br>
                 <div class="col text-center">
                     <button type='submit' name='SignUp' id="SignUp" class="btn btn-primary btn-rounded">Sign Up</button>
+
+                    <br>
+                    <br>
+
+                    <!-- This is where the error message goes -->
+                    <?php if(isset($_GET['error'])) { ?>
+                    <span style="color:#ff0000" ><p class="error"> <?php echo $_GET['error']; ?></p></span>
+                    <?php } ?>
                 </div>
             </div>
+
           </form>
     </body>
 </html>    

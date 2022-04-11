@@ -15,9 +15,25 @@
             $Password= $_POST['Password'];
             $Type= $_POST['Type'];
 
+            
+            // Make sure this username isn't taken:
+            $sql= "CALL user_get('$Username')";
+            $query = mysqli_query($conn,$sql);
+
+            if(mysqli_num_rows($query)>=1)
+            {
+                header("Location: signup.php?error=Username already taken!");
+                exit();
+            }
+
+            // If username not taken, continue as normal:
+
             // Put this information in an SQL query (using the api endpoint 'call user_add' I made rather than a long query):
             $sql= "CALL user_add('$Name', '$Email', '$Phone', '$Username', '$Password', '$Type')";
 
+            // Have to set this every time you want to execute a query apparently:
+            $conn= mysqli_connect('localhost', 'root', '', 'propertymanager') or die("Connection Failed:" .mysqli_connect_error());
+            
             // Send this query to the database, return a message for if it was successful or not
             $query = mysqli_query($conn,$sql);
             if($query)
@@ -28,12 +44,13 @@
             }
             else
             {
-                echo 'Error Occurred';
+                echo 'Error: Something wrong with connect.php signup form SQL query';
             }
+ 
         }
         else
         {
-            echo 'Error: There is something wrong with your input';
+            echo 'Error: Something wrong with connect.php signup form input';
         }
     }
 
@@ -100,7 +117,6 @@
     else
     {
         // Used for non-signup-form db connection:
-        // Could probably use the code above for this but i'm still a php noob
         $sname = "localhost";
         $uname = "root";
         $password = "";

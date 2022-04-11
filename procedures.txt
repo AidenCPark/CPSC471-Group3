@@ -54,22 +54,12 @@ INSERT INTO person (Name,Email,Phone,Username,Password,Type) VALUES (name,email,
 DELIMITER ;
 
 DELIMITER $$
-CREATE PROCEDURE `user_get`(IN `id` INT)
-SELECT * FROM person WHERE UserID = id$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE PROCEDURE `user_pw`(IN `id` INT)
-SELECT Password FROM person WHERE UserID = id$$
+CREATE PROCEDURE `user_get`(IN `un` VARCHAR(255))
+SELECT * FROM person WHERE Username=un$$
 DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE `user_select`(IN `un` VARCHAR(255), IN `pw` VARCHAR(255))
 SELECT * FROM person WHERE Username=un AND Password=pw$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE PROCEDURE `user_un`(IN `id` INT)
-SELECT Username FROM person WHERE UserID = id$$
 DELIMITER ;
 

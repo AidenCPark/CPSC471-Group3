@@ -41,10 +41,6 @@
         <br />
         <br />
 
-        <?php if(isset($_GET['error'])) { ?>
-          <p class="error"> <?php echo $_GET['error']; ?></p>
-        <?php } ?>
-
         <div class="form-group">
           <label for="Username">Enter Username:</label>
           <br />
@@ -70,6 +66,12 @@
         <input type="submit" value="Log In" class="btn btn-primary" />
         <br />
         <br />
+
+        <!-- This is where the error message goes -->
+        <?php if(isset($_GET['error'])) { ?>
+          <span style="color:#ff0000"><p class="error"> <?php echo $_GET['error']; ?></p></span>
+        <?php } ?>
+
         <a class="dropdown-item" href="signup.php">New user? Sign Up</a>
       </form>
     </div>
