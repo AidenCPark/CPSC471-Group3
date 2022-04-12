@@ -11,7 +11,7 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Search Property</title>
+        <title>Search Properties</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
@@ -63,7 +63,7 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
     <body>
         <h2 class="text-center">Search Property Listings</h2>
         <form
-            action="create_listing"
+            action=""
             method="POST"
             style="
               padding: 5%;
@@ -72,107 +72,161 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
             "
         >
         <div class="form-group row">
-            <label for="inputGenderSearch" class="col-sm-2 col-form-label">Price Range:</label
-            >
+            <label for="MinPrice" class="col-sm-2 col-form-label">Minimum Price:</label>
             <div class="col-auto my-1">
-              <select
-                name="gender"
-                class="custom-select custom-select-sm"
-                id="inputGenderSearch"
+              <input
+                type="number"
+                name="MinPrice"
+                class="form-control"
+                id="MinPrice"
                 placeholder=""
+                value="0"
+                required
               >
-                <option value="Min">Min</option>
-                <option value="100,000+">100,000+</option>
-                <option value="200,000+">200,000+</option>
-                <option value="300,000+">300,000+</option>
-                <option value="Max">Max</option>
-              </select>
+            </input>
             </div>
         </div>
 
         <div class="form-group row">
-            <label for="inputGenderSearch" class="col-sm-2 col-form-label">Num of Bedrooms:</label
-            >
+            <label for="MaxPrice" class="col-sm-2 col-form-label">Maximum Price:</label>
             <div class="col-auto my-1">
-              <select
-                name="gender"
-                class="custom-select custom-select-sm"
-                id="inputGenderSearch"
+              <input
+                type="number"
+                name="MaxPrice"
+                class="form-control"
+                id="MaxPrice"
                 placeholder=""
+                value="1000000"
+                required
               >
-                <option value="Min">Min</option>
-                <option value="1+">1+</option>
-                <option value="2+">2+</option>
-                <option value="3+">3+</option>
-                <option value="Max">Max</option>
-              </select>
+            </input>
             </div>
         </div>
 
         <div class="form-group row">
-            <label for="inputGenderSearch" class="col-sm-2 col-form-label">Num of Bathrooms:</label
+            <label for="NumOfFloors" class="col-sm-2 col-form-label">Number of Floors:</label
             >
             <div class="col-auto my-1">
-              <select
-                name="gender"
-                class="custom-select custom-select-sm"
-                id="inputGenderSearch"
+              <input
+                type="number"
+                name="NumOfFloors"
+                class="form-control"
+                id="NumOfFloors"
                 placeholder=""
+                required
               >
-                <option value="Min">Min</option>
-                <option value="1+">1+</option>
-                <option value="2+">2+</option>
-                <option value="3+">3+</option>
-                <option value="Max">Max</option>
-              </select>
+            </input>
             </div>
         </div>
 
         <div class="form-group row">
-            <label for="inputGenderSearch" class="col-sm-2 col-form-label">House Type:</label
+            <label for="NumOfBedrooms" class="col-sm-2 col-form-label">Number of Bedrooms:</label
             >
             <div class="col-auto my-1">
-              <select
-                name="gender"
-                class="custom-select custom-select-sm"
-                id="inputGenderSearch"
+              <input
+                type="number"
+                name="NumOfBedrooms"
+                class="form-control"
+                id="NumOfBedrooms"
                 placeholder=""
+                required
               >
-                <option value="Any">Any</option>
-                <option value="Bungalow">Bungalow</option>
-                <option value="Detached">Detached</option>
-                <option value="Semi-Detached">Semi-Detached</option>
-                <option value="Attached">Attached</option>
-              </select>
+            </input>
             </div>
         </div>
 
         <div class="form-group row">
-            <label for="inputGenderSearch" class="col-sm-2 col-form-label">City Quadrant:</label
+            <label for="NumOfBathrooms" class="col-sm-2 col-form-label">Number of Bathrooms:</label
+            >
+            <div class="col-auto my-1">
+              <input
+                type="number"
+                name="NumOfBathrooms"
+                class="form-control"
+                id="NumOfBathrooms"
+                placeholder=""
+                required
+              >
+            </input>
+            </div>
+        </div>
+
+        <!-- Get all the different house styles from the database -->
+        <?php
+        $conn = mysqli_connect('localhost', 'root', '', 'propertymanager') or die("Connection Failed:" .mysqli_connect_error());
+        $query = "CALL property_styles()";
+        $result = mysqli_query($conn, $query);
+        ?>
+
+        <div class="form-group row">
+            <label for="Style" class="col-sm-2 col-form-label">Style:</label
             >
             <div class="col-auto my-1">
               <select
-                name="gender"
+                name="Style"
                 class="custom-select custom-select-sm"
-                id="inputGenderSearch"
+                id="Style"
                 placeholder=""
               >
-                <option value="Any">Any</option>
-                <option value="NW">NW</option>
-                <option value="NE">NE</option>
-                <option value="SW">SW</option>
-                <option value="SE">SE</option>
+
+              <?php while($row = mysqli_fetch_row($result)):;?>
+              <option value="<?php echo $row[0];?>"><?php echo $row[0];?></option>
+              <?php endwhile;?>
+
+
               </select>
             </div>
         </div>
+
 
           <div class="form-group row">
             <div class="col-auto my-1">
-              <button type="submit" class="btn btn-primary">Search</button>
+              <button type="submit" name="Search" value="Search" id="Search" class="btn btn-primary">Search</button>
             </div>
           </div>
     </form>
     </div>
+    
+    <!-- Search Results -->
+    <div style="text-align:center">
+
+
+    <?php
+
+    if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Search']))  
+    {
+      // Connect to database: return error if can't connect
+      $conn= mysqli_connect('localhost', 'root', '', 'propertymanager') or die("Connection Failed:" .mysqli_connect_error());
+      
+      $MinPrice= $_POST['MinPrice'];
+      $MaxPrice= $_POST['MaxPrice'];
+      $NumOfFloors= $_POST['NumOfFloors'];
+      $NumOfBedrooms= $_POST['NumOfBedrooms'];
+      $NumOfBathrooms= $_POST['NumOfBathrooms'];
+      $Style= $_POST['Style'];
+
+      $sql= "CALL property_get('$MinPrice', '$MaxPrice', '$NumOfFloors', '$NumOfBedrooms', '$NumOfBathrooms', '$Style')";
+      $query = mysqli_query($conn,$sql);
+
+      if(mysqli_num_rows($query)===0)
+      {
+        echo '<br />No results found.';
+      }
+          
+      while($row = mysqli_fetch_array($query))
+      {
+          echo '<br />' .$row['Address'];
+          echo '<br />$' .$row['Price'];
+          echo '<br /> Status: ' .$row['Status'];
+          echo '<br />';
+      }
+    }
+
+    ?>
+    
+
+    </div>
+
     </body>
 </html>    
 

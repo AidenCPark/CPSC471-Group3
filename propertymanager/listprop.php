@@ -108,7 +108,7 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
                 </div>
                 </br>
                 <div class="col text-center">
-                    <button type='sumbit' name='ListProp' id='ListProp' class="btn btn-primary btn-rounded">List Property</button>
+                    <button type='submit' name='ListProp' id='ListProp' class="btn btn-primary btn-rounded">List Property</button>
                 </div>
             </div>
           </form>

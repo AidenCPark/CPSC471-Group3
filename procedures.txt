@@ -34,8 +34,13 @@ INSERT INTO property (RealtorID,Address,Price,Style,Status,NumOfFloors,NumOfBedr
 DELIMITER ;
 
 DELIMITER $$
-CREATE PROCEDURE `property_get`(IN `id` INT)
-SELECT * FROM property WHERE PropertyID = id$$
+CREATE PROCEDURE `property_get`(IN `minprice` INT, IN `maxprice` INT, IN `floors` INT, IN `bedrooms` INT, IN `bathrooms` INT, IN `type` VARCHAR(255))
+SELECT * FROM property WHERE Price>=minprice AND Price <=maxprice AND NumOfFloors=floors AND NumOfBedrooms=bedrooms AND NumOfBathrooms=bathrooms AND Style=type$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `property_styles`()
+SELECT Style FROM property$$
 DELIMITER ;
 
 DELIMITER $$
