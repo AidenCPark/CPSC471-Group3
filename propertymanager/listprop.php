@@ -2,7 +2,7 @@
 <?php
 session_start();
 
-if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
+if(isset($_SESSION['UserID']) && isset($_SESSION['Username']) && ($_SESSION['Type'] == 'Realtor'))
 {
 ?>
 
