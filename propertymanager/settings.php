@@ -11,7 +11,7 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Search Property</title>
+        <title>Settings</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="">
@@ -61,7 +61,7 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
         </div>
     </nav>
     <body>
-        <h2 class="text-center">Search Property Listings</h2>
+        <h2 class="text-center">Settings</h2>
         <form
             action="create_listing"
             method="POST"
