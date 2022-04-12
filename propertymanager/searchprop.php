@@ -205,7 +205,7 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
       $NumOfBathrooms= $_POST['NumOfBathrooms'];
       $Style= $_POST['Style'];
 
-      $sql= "CALL property_get('$MinPrice', '$MaxPrice', '$NumOfFloors', '$NumOfBedrooms', '$NumOfBathrooms', '$Style')";
+      $sql= "CALL property_search('$MinPrice', '$MaxPrice', '$NumOfFloors', '$NumOfBedrooms', '$NumOfBathrooms', '$Style')";
       $query = mysqli_query($conn,$sql);
 
       if(mysqli_num_rows($query)===0)

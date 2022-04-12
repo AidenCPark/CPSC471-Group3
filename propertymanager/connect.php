@@ -84,7 +84,7 @@
                 $query = mysqli_query($conn,$sql);
                 if($query)
                 {
-                    // Redirect to the login page
+                    // Redirect to the listings page
                     header("Location: listings.php");
                     exit();
                 }
@@ -98,13 +98,87 @@
                 echo 'Error: There is something wrong with your input';
             }
 
-            }
+        }
         else
         {
             header("Location: index.php");
             exit();
         }
     }
+
+    // Connection for the Book Appointment form:
+        if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Appointment']))
+        {
+            // Connect to database: return error if can't connect
+            $conn= mysqli_connect('localhost', 'root', '', 'propertymanager') or die("Connection Failed:" .mysqli_connect_error());
+
+            if(isset($_POST['ClientID']) && isset($_POST['RealtorID']) && isset($_POST['Date']))
+            {
+                $ClientID = $_POST['ClientID'];
+                $RealtorID = $_POST['RealtorID'];
+                $Date = $_POST['Date'];
+
+                $sql= "CALL appointment_add('$ClientID', '$RealtorID', '$Date')";
+                $query = mysqli_query($conn,$sql);
+                if($query)
+                {
+                    header("Location: listings.php");
+                    exit();
+                }
+                else
+                {
+                    echo 'Error Occurred';
+                }
+
+            }
+            else
+            {
+                echo 'Error: Something wrong with the appointment input.';
+            }
+            
+            
+        }
+
+        // Connection for the Edit Property form:
+            if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['PropUpdate']))
+            {
+                // Connect to database: return error if can't connect
+                $conn= mysqli_connect('localhost', 'root', '', 'propertymanager') or die("Connection Failed:" .mysqli_connect_error());
+    
+                if(isset($_POST['PropertyID']) && isset($_POST['RealtorID']) && isset($_POST['Address']) && isset($_POST['Status']) && isset($_POST['Price']) && isset($_POST['Style']) && isset($_POST['NumOfFloors']) && isset($_POST['NumOfBedrooms']) && isset($_POST['NumOfBathrooms']))
+                {
+                    $PropertyID = $_POST['PropertyID'];
+                    $RealtorID = $_POST['RealtorID'];
+                    $Address = $_POST['Address'];
+                    $Status = $_POST['Status'];
+                    $Price = $_POST['Price'];
+                    $Style = $_POST['Style'];
+                    $NumOfFloors = $_POST['NumOfFloors'];
+                    $NumOfBedrooms = $_POST['NumOfBedrooms'];
+                    $NumOfBathrooms = $_POST['NumOfBathrooms'];
+    
+                    $sql= "CALL property_update('$PropertyID', '$RealtorID', '$Address', '$Price', '$Style', '$Status', '$NumOfFloors', '$NumOfBedrooms', '$NumOfBathrooms')";
+                    $query = mysqli_query($conn,$sql);
+                    if($query)
+                    {
+                        header("Location: product_view.php?id=$PropertyID");
+                        exit();
+                    }
+                    else
+                    {
+                        echo 'Error Occurred';
+                    }
+    
+                }
+                else
+                {
+                    echo 'Error: Something wrong with the edit property input.';
+                }
+                
+                
+            }
+
+        
 
     // Connection for getting user info (checking if logged in):
     else

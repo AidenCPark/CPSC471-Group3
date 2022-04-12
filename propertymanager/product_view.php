@@ -1,9 +1,25 @@
-<!-- Check if logged in, and get user info if so -->
+<!-- Check if logged in, and get user info if so – Also get property info -->
 <?php
 session_start();
 
 if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
 {
+
+  $id = $_GET["id"];
+  $conn = mysqli_connect('localhost', 'root', '', 'propertymanager') or die("Connection Failed:" .mysqli_connect_error());
+  $sql= "CALL property_get('$id')";
+  $result = mysqli_query($conn,$sql);
+  $property = mysqli_fetch_row($result);
+  $PropertyID = $property[0];
+  $RealtorID = $property[1];
+  $Address = $property[2];
+  $Price = $property[3];
+  $Style = $property[4];
+  $Status = $property[5];
+  $NumOfFloors = $property[6];
+  $NumOfBedrooms = $property[7];
+  $NumOfBathrooms = $property[8];
+  $ClientID = $_SESSION['UserID'];
 ?>
 
 <!DOCTYPE html>
@@ -41,10 +57,10 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
         <div class="collapse navbar-collapse" id="mynav">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <a href="#" class="nav-link">Search Properties</a>
+              <a href="searchprop.php" class="nav-link">Search Properties</a>
             </li>
             <li class="nav-item">
-              <a href="#" class="nav-link">My Watchlist</a>
+              <a href="watchlist.php" class="nav-link">My Watchlist</a>
             </li>
 
             <?php if ($_SESSION['Type'] == 'Realtor'): ?>
@@ -54,9 +70,9 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
             <?php endif ?>
 
             <li class="nav-item">
-              <a href="#" class="nav-link">Settings</a>
+              <a href="settings.php" class="nav-link">Settings</a>
             </li>
-            <li class="nav-item"><a href="#" class="nav-link">Logout</a></li>
+            <li class="nav-item"><a href="logout.php" class="nav-link">Logout</a></li>
           </ul>
         </div>
     </nav>
@@ -65,28 +81,66 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
         <div class="card" style="border-radius: 25px">
           <div class="card-body">
             <div class="row">
-              <div class="col">
-                <img src="imgs/p8.jpg" class="img-responsive" width="600" />
-              </div>
-              <div class="col">
+              <div class="col text-center">
                 <h2 class="mt-5" style="display: inline-block">
-                    15 Vine Dr. Waxhaw, NC 28173
+                    <?php echo $Address ?>
                 </h2>
-                <p class="font-italic" style = "text-indent: 50px;">
-                    Welcome to this beautiful 2 bed, 2 bath condo located in Arbour Lake! 
-                    This condo has a great floor plan featuring a spacious living room & dining area with amazing upgraded engineered hardwood floors. 
-                    Nice bright clean kitchen with upgraded tiled floors. Bedroom #1 is a great size with a good size closet. 
-                    The Primary Bedroom is even bigger with a larger closet and ensuite bathroom! 
-                    This home also has in-suite laundry, a large storage room & beautiful private balcony! 
-                </p>
+
                 <br>
-                <div class="col text-center">
-                    <button type="button" class="btn btn-md btn-secondary">Add to Watchlist</button>
-                </div>
                 <br>
-                <div class="col text-center">
-                    <button class="btn btn-primary btn-rounded">Book Appointment</button>
+
+                <!-- Booking appointments – only for clients -->
+                <?php if ($_SESSION['Type'] == 'Client'): ?>
+
+                  <form
+                  action="connect.php"
+                  method="POST"
+                  style=""
+                >
+
+                <input
+                name="ClientID"
+                type="hidden"
+                id="ClientID"
+                value="<?php echo $ClientID ?>" >
+                </input>
+                <input
+                name="RealtorID"
+                type="hidden"
+                id="RealtorID"
+                value="<?php echo $RealtorID ?>" >
+                </input>
+
+                <h3 class="box-title mt-5" style="text-align:left;">Book Appointment</h3>
+                <br>
+            <div class="form-group row">
+            <label for="Date" class="col-sm-2 col-form-label">Appointment Date:</label>
+            <div class="col-auto my-1">
+              <input
+                type="date"
+                name="Date"
+                class="form-control"
+                id="Date"
+                placeholder=""
+                required
+              >
+            </input>
+            
+
+            </div>
+            </div>
+
+                <div class="row" style="padding-left:2.2%;">
+                    <button name="Appointment" id="Appointment" type="submit" class="btn btn-primary btn-rounded">Submit</button>
                 </div>
+
+
+               </form>
+
+              <?php endif ?>
+                
+
+
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12">
               <h3 class="box-title mt-5">Property Details</h3>
@@ -94,24 +148,40 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
                 <table class="table">
                   <tbody>
                     <tr>
-                      <td width="290">Broker</td>
-                      <td>Calgary Realtors Corp.</td>
+                      <td width="290">Status</td>
+                      <td>
+                        <?php echo $Status ?>
+                      </td>
                     </tr>
                     <tr>
                       <td>Price</td>
-                      <td>$385,000</td>
+                      <td>
+                        $<?php echo $Price ?>
+                      </td>
                     </tr>
                     <tr>
-                      <td>Bedrooms</td>
-                      <td>3</td>
+                      <td>Style</td>
+                      <td>
+                        <?php echo $Style ?>
+                      </td>
                     </tr>
                     <tr>
-                      <td>Bathrooms</td>
-                      <td>4</td>
+                      <td>Number of Floors</td>
+                      <td>
+                        <?php echo $NumOfFloors ?>-storey
+                      </td>
                     </tr>
                     <tr>
-                      <td>Type</td>
-                      <td>Bungalow</td>
+                      <td>Number of Bedrooms</td>
+                      <td>
+                        <?php echo $NumOfBedrooms ?> bedroom(s)
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Number of Bathrooms</td>
+                      <td>
+                        <?php echo $NumOfBathrooms ?> bathroom(s)
+                      </td>
                     </tr>
                   </tbody>
                 </table>
@@ -120,6 +190,36 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
           </div>
         </div>
       </div>
+
+      <?php if ($_SESSION['Type'] == 'Admin'): ?>            
+
+        <h3 class="box-title mt-5" style="text-align:left;">Edit Property</h3>
+        <br>
+
+        <form action="connect.php" method="POST" style="">
+
+        <input name="PropertyID" type="hidden" id="PropertyID" value="<?php echo $PropertyID ?>" ></input>
+        <input name="RealtorID" type="hidden" id="RealtorID" value="<?php echo $RealtorID ?>" ></input>
+        Address: <input required name="Address" type="text" id="Address" value="<?php echo $Address ?>" ></input>
+        <br>
+        Status: <input required name="Status" type="text" id="Status" value="<?php echo $Status ?>" ></input>
+        <br>
+        Price: <input required name="Price" type="number" id="Price" value="<?php echo $Price ?>" ></input>
+        <br>
+        Style: <input required name="Style" type="text" id="Style" value="<?php echo $Style ?>" ></input>
+        <br>
+        Number of Floors: <input required name="NumOfFloors" type="number" id="NumOfFloors" value="<?php echo $NumOfFloors ?>" ></input>
+        <br>
+        Number of Bedrooms: <input required name="NumOfBedrooms" type="number" id="NumOfBedrooms" value="<?php echo $NumOfBedrooms ?>" ></input>
+        <br>
+        Number of Bathrooms: <input required name="NumOfBathrooms" type="number" id="NumOfBathrooms" value="<?php echo $NumOfBathrooms ?>" ></input>
+
+        <br><br>
+        <button name="PropUpdate" id="PropUpdate" type="submit" class="btn btn-primary btn-rounded">Submit</button>
+
+        </form>
+
+      <?php endif ?>
 </body>
 </html>   
 
