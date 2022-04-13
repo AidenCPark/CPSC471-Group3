@@ -106,39 +106,6 @@
         }
     }
 
-    // Connection for the Book Appointment form:
-        if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['Appointment']))
-        {
-            // Connect to database: return error if can't connect
-            $conn= mysqli_connect('localhost', 'root', '', 'propertymanager') or die("Connection Failed:" .mysqli_connect_error());
-
-            if(isset($_POST['ClientID']) && isset($_POST['RealtorID']) && isset($_POST['Date']))
-            {
-                $ClientID = $_POST['ClientID'];
-                $RealtorID = $_POST['RealtorID'];
-                $Date = $_POST['Date'];
-
-                $sql= "CALL appointment_add('$ClientID', '$RealtorID', '$Date')";
-                $query = mysqli_query($conn,$sql);
-                if($query)
-                {
-                    header("Location: listings.php");
-                    exit();
-                }
-                else
-                {
-                    echo 'Error Occurred';
-                }
-
-            }
-            else
-            {
-                echo 'Error: Something wrong with the appointment input.';
-            }
-            
-            
-        }
-
         // Connection for the Edit Property form:
             if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['PropUpdate']))
             {

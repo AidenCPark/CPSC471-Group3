@@ -22,28 +22,7 @@
             <img src="imgs/PMLOGO.PNG" width="30" height="30" class="d-inline-block align-top" alt="">
             Property Manager
           </a>
-        <!-- <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#mynav"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="mynav">
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a href="#" class="nav-link">Search Properties</a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">My Watchlist</a>
-            </li>
-            <li class="nav-item">
-              <a href="#" class="nav-link">Settings</a>
-            </li>
-            <li class="nav-item"><a href="#" class="nav-link">Login</a></li>
-          </ul>
-        </div> -->
+
     </nav>
     <body>
         <h2 class="text-center">Sign Up</h2>

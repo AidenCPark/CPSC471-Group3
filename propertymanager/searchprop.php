@@ -43,9 +43,6 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
             <li class="nav-item">
                 <a href="searchprop.php" class="nav-link">Search Properties</a>
             </li>
-            <li class="nav-item">
-              <a href="watchlist.php" class="nav-link">My Watchlist</a>
-            </li>
 
             <?php if ($_SESSION['Type'] == 'Realtor'): ?>
             <li class="nav-item">
@@ -53,9 +50,6 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
             </li>
             <?php endif ?>
 
-            <li class="nav-item">
-              <a href="settings.php" class="nav-link">Settings</a>
-            </li>
             <li class="nav-item"><a href="logout.php" class="nav-link">Logout</a></li>
           </ul>
         </div>
@@ -151,34 +145,6 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
             </div>
         </div>
 
-        <!-- Get all the different house styles from the database -->
-        <?php
-        $conn = mysqli_connect('localhost', 'root', '', 'propertymanager') or die("Connection Failed:" .mysqli_connect_error());
-        $query = "CALL property_styles()";
-        $result = mysqli_query($conn, $query);
-        ?>
-
-        <div class="form-group row">
-            <label for="Style" class="col-sm-2 col-form-label">Style:</label
-            >
-            <div class="col-auto my-1">
-              <select
-                name="Style"
-                class="custom-select custom-select-sm"
-                id="Style"
-                placeholder=""
-              >
-
-              <?php while($row = mysqli_fetch_row($result)):;?>
-              <option value="<?php echo $row[0];?>"><?php echo $row[0];?></option>
-              <?php endwhile;?>
-
-
-              </select>
-            </div>
-        </div>
-
-
           <div class="form-group row">
             <div class="col-auto my-1">
               <button type="submit" name="Search" value="Search" id="Search" class="btn btn-primary">Search</button>
@@ -203,9 +169,8 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
       $NumOfFloors= $_POST['NumOfFloors'];
       $NumOfBedrooms= $_POST['NumOfBedrooms'];
       $NumOfBathrooms= $_POST['NumOfBathrooms'];
-      $Style= $_POST['Style'];
 
-      $sql= "CALL property_search('$MinPrice', '$MaxPrice', '$NumOfFloors', '$NumOfBedrooms', '$NumOfBathrooms', '$Style')";
+      $sql= "CALL property_search('$MinPrice', '$MaxPrice', '$NumOfFloors', '$NumOfBedrooms', '$NumOfBathrooms')";
       $query = mysqli_query($conn,$sql);
 
       if(mysqli_num_rows($query)===0)
@@ -213,16 +178,19 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
         echo '<br />No results found.';
       }
           
-      while($row = mysqli_fetch_array($query))
-      {
-          echo '<br />' .$row['Address'];
-          echo '<br />$' .$row['Price'];
-          echo '<br /> Status: ' .$row['Status'];
-          echo '<br />';
-      }
-    }
+      while($row = mysqli_fetch_array($query)):;?>
 
-    ?>
+      <a href="product_view.php?id=<?php echo $row['PropertyID'];?>">
+      <?php echo '<br />' .$row['Address'];?>
+      <?php echo '<br />$' .$row['Price'];?>
+      <?php echo '<br />';?>
+      </a>
+
+      <?php endwhile;?>
+
+      <?php } ?>
+
+
     
 
     </div>

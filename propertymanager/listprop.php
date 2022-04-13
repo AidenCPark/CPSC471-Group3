@@ -43,9 +43,6 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']) && ($_SESSION['Typ
                 <li class="nav-item">
                   <a href="searchprop.php" class="nav-link">Search Properties</a>
                 </li>
-                <li class="nav-item">
-                  <a href="watchlist.php" class="nav-link">My Watchlist</a>
-                </li>
 
                 <?php if ($_SESSION['Type'] == 'Realtor'): ?>
                 <li class="nav-item">
@@ -53,9 +50,6 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']) && ($_SESSION['Typ
                 </li>
                 <?php endif ?>
 
-                <li class="nav-item">
-                  <a href="settings.php" class="nav-link">Settings</a>
-                </li>
                 <li class="nav-item"><a href="logout.php" class="nav-link">Logout</a></li>
               </ul>
             </div>

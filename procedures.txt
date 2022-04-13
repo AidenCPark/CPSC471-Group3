@@ -39,11 +39,6 @@ SELECT * FROM property WHERE PropertyID=id$$
 DELIMITER ;
 
 DELIMITER $$
-CREATE PROCEDURE `property_search`(IN `minprice` INT, IN `maxprice` INT, IN `floors` INT, IN `bedrooms` INT, IN `bathrooms` INT, IN `type` VARCHAR(255))
-SELECT * FROM property WHERE Price>=minprice AND Price <=maxprice AND NumOfFloors=floors AND NumOfBedrooms=bedrooms AND NumOfBathrooms=bathrooms AND Style=type$$
-DELIMITER ;
-
-DELIMITER $$
 CREATE PROCEDURE `property_styles`()
 SELECT Style FROM property$$
 DELIMITER ;
@@ -71,5 +66,10 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE `user_select`(IN `un` VARCHAR(255), IN `pw` VARCHAR(255))
 SELECT * FROM person WHERE Username=un AND Password=pw$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `property_search`(IN `minprice` INT, IN `maxprice` INT, IN `floors` INT, IN `bedrooms` INT, IN `bathrooms` INT)
+SELECT * FROM property WHERE Price>=minprice AND Price <=maxprice AND NumOfFloors=floors AND NumOfBedrooms=bedrooms AND NumOfBathrooms=bathrooms$$
 DELIMITER ;
 

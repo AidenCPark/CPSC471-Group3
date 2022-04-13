@@ -44,9 +44,6 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
                 <li class="nav-item">
                   <a href="searchprop.php" class="nav-link">Search Properties</a>
                 </li>
-                <li class="nav-item">
-                  <a href="watchlist.php" class="nav-link">My Watchlist</a>
-                </li>
 
                 <?php if ($_SESSION['Type'] == 'Realtor'): ?>
                 <li class="nav-item">
@@ -54,9 +51,6 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
                 </li>
                 <?php endif ?>
 
-                <li class="nav-item">
-                  <a href="settings.php" class="nav-link">Settings</a>
-                </li>
                 <li class="nav-item"><a href="logout.php" class="nav-link">Logout</a></li>
               </ul>
             </div>
@@ -70,189 +64,45 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
                     </div>
                 </div>
 
-                <div class="row">
+                <?php
+
+                // Connect to database: return error if can't connect
+                $conn= mysqli_connect('localhost', 'root', '', 'propertymanager') or die("Connection Failed:" .mysqli_connect_error());
+
+                $sql= "CALL property()";
+                $query = mysqli_query($conn,$sql);
+
+                if(mysqli_num_rows($query)===0)
+                {
+                    echo '<br />No properties found.';
+                }
+
+                ?>
+
+                <div class="row">   
+
+                <?php while($row = mysqli_fetch_array($query)):;?>
+
                     <div class="col-md-4">
                         <div class="card mb-4 box-shadow">
-                            <img class="card-img-top" src="imgs/p1.jpg" alt="Card image cap">
                             <div class="card-body">
-                                <h4 class = "card-title">$385,000</h4> 
-                                <p style="margin-bottom:0;"class="card-text">15 Vine Dr. Waxhaw, NC 28173</p>
-                                <p style="margin-bottom:0;"class="card-text">Bedrooms: 3</p>
-                                <p class="card-text">Bathrooms: 4</p>
+                                <h4 class = "card-title">$<?php echo $row[3];?></h4> 
+                                <p style="margin-bottom:0;"class="card-text"><?php echo $row[2];?></p>
+                                <p style="margin-bottom:0;"class="card-text">Bedrooms: <?php echo $row[7];?></p>
+                                <p class="card-text">Bathrooms: <?php echo $row[8];?></p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                        <button type="button" onclick="window.location='product_view.php?id=<?php echo $row[0];?>'" class="btn btn-sm btn-outline-secondary">View</button>
                                     </div>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Add to Watchlist</button>
-                                    </div>
-                                    <small class="text-muted">Active</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card mb-4 box-shadow">
-                            <img class="card-img-top" src="imgs/p2.jpg" alt="Card image cap">
-                            <div class="card-body">
-                                <h4 class = "card-title">$475,000</h4> 
-                                <p style="margin-bottom:0;"class="card-text">15 Vine Dr. Waxhaw, NC 28173</p>
-                                <p style="margin-bottom:0;"class="card-text">Bedrooms: 3</p>
-                                <p class="card-text">Bathrooms: 4</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    </div>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Add to Watchlist</button>
-                                    </div>
-                                    <small class="text-muted">Active</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card mb-4 box-shadow">
-                            <img class="card-img-top" src="imgs/p3.jpg" alt="Card image cap">
-                            <div class="card-body">
-                                <h4 class = "card-title">$360,750</h4> 
-                                <p style="margin-bottom:0;"class="card-text">15 Vine Dr. Waxhaw, NC 28173</p>
-                                <p style="margin-bottom:0;"class="card-text">Bedrooms: 3</p>
-                                <p class="card-text">Bathrooms: 4</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    </div>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Add to Watchlist</button>
-                                    </div>
-                                    <small class="text-muted">Active</small>
+                                    <small class="text-muted"><?php echo $row[5];?></small>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-md-4">
-                        <div class="card mb-4 box-shadow">
-                            <img class="card-img-top" src="imgs/p4.jpg" alt="Card image cap">
-                            <div class="card-body">
-                                <h4 class = "card-title">$500,000</h4> 
-                                <p style="margin-bottom:0;"class="card-text">15 Vine Dr. Waxhaw, NC 28173</p>
-                                <p style="margin-bottom:0;"class="card-text">Bedrooms: 3</p>
-                                <p class="card-text">Bathrooms: 4</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    </div>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Add to Watchlist</button>
-                                    </div>
-                                    <small class="text-muted">Active</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card mb-4 box-shadow">
-                            <img class="card-img-top" src="imgs/p8.jpg" alt="Card image cap">
-                            <div class="card-body">
-                                <h4 class = "card-title">$600,000</h4> 
-                                <p style="margin-bottom:0;"class="card-text">15 Vine Dr. Waxhaw, NC 28173</p>
-                                <p style="margin-bottom:0;"class="card-text">Bedrooms: 3</p>
-                                <p class="card-text">Bathrooms: 4</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    </div>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Add to Watchlist</button>
-                                    </div>
-                                    <small class="text-muted">Active</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card mb-4 box-shadow">
-                            <img class="card-img-top" src="imgs/p6.jpg" alt="Card image cap">
-                            <div class="card-body">
-                                <h4 class = "card-title">$200,000</h4> 
-                                <p style="margin-bottom:0;"class="card-text">15 Vine Dr. Waxhaw, NC 28173</p>
-                                <p style="margin-bottom:0;"class="card-text">Bedrooms: 3</p>
-                                <p class="card-text">Bathrooms: 4</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    </div>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Add to Watchlist</button>
-                                    </div>
-                                    <small class="text-muted">Active</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <option value="<?php echo $row[0];?>"><?php echo $row[0];?></option>
+                <?php endwhile;?>
 
-                    <div class="col-md-4">
-                        <div class="card mb-4 box-shadow">
-                            <img class="card-img-top" src="imgs/p7.jpg" alt="Card image cap">
-                            <div class="card-body">
-                                <h4 class = "card-title">$300,469</h4> 
-                                <p style="margin-bottom:0;"class="card-text">15 Vine Dr. Waxhaw, NC 28173</p>
-                                <p style="margin-bottom:0;"class="card-text">Bedrooms: 3</p>
-                                <p class="card-text">Bathrooms: 4</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    </div>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Add to Watchlist</button>
-                                    </div>
-                                    <small class="text-muted">Active</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card mb-4 box-shadow">
-                            <img class="card-img-top" src="imgs/p8.jpg" alt="Card image cap">
-                            <div class="card-body">
-                                <h4 class = "card-title">$385,643</h4> 
-                                <p style="margin-bottom:0;"class="card-text">15 Vine Dr. Waxhaw, NC 28173</p>
-                                <p style="margin-bottom:0;"class="card-text">Bedrooms: 3</p>
-                                <p class="card-text">Bathrooms: 4</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    </div>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Add to Watchlist</button>
-                                    </div>
-                                    <small class="text-muted">Active</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="card mb-4 box-shadow">
-                            <img class="card-img-top" src="imgs/PMLOGO.PNG" alt="Card image cap">
-                            <div class="card-body">
-                                <h4 class = "card-title">$385,000</h4> 
-                                <p style="margin-bottom:0;"class="card-text">15 Vine Dr. Waxhaw, NC 28173</p>
-                                <p style="margin-bottom:0;"class="card-text">Bedrooms: 3</p>
-                                <p class="card-text">Bathrooms: 4</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    </div>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-sm btn-outline-secondary">Add to Watchlist</button>
-                                    </div>
-                                    <small class="text-muted">Active</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
