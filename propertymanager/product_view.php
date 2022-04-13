@@ -84,6 +84,7 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
                 <br>
 
                 <!-- Booking appointments – only for clients -->
+
                 <?php if ($_SESSION['Type'] == 'Client'): ?>
 
                   <form
@@ -132,8 +133,24 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
                </form>
 
               <?php endif ?>
-                
 
+              <!-- Remove Button -->
+
+              <?php if ($_SESSION['Type'] == 'Admin' || ($_SESSION['Type'] == 'Realtor' && $RealtorID == $_SESSION['UserID'])): ?>   
+
+                <form action="api_removeprop.php" method="POST" style="">
+
+                <input type="hidden" name="PropertyID" id="PropertyID" value="<?php echo $PropertyID ?>"></input>
+
+                <div class="col text-center" style="">
+                    <button name="Remove" id="Remove" type="submit" class="btn btn-rounded" style="background-color:red">Remove</button>
+                </div>
+
+                </form>
+                
+              <?php endif ?>
+
+              <!-- Property Info -->
 
             </div>
             <div class="col-lg-12 col-md-12 col-sm-12">
@@ -185,7 +202,7 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
         </div>
       </div>
 
-      <?php if ($_SESSION['Type'] == 'Admin'): ?>            
+      <?php if ($_SESSION['Type'] == 'Admin' || ($_SESSION['Type'] == 'Realtor' && $RealtorID == $_SESSION['UserID'])): ?>            
 
         <h3 class="box-title mt-5" style="text-align:left;">Edit Property</h3>
         <br>

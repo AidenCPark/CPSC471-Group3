@@ -73,3 +73,8 @@ CREATE PROCEDURE `property_search`(IN `minprice` INT, IN `maxprice` INT, IN `flo
 SELECT * FROM property WHERE Price>=minprice AND Price <=maxprice AND NumOfFloors=floors AND NumOfBedrooms=bedrooms AND NumOfBathrooms=bathrooms$$
 DELIMITER ;
 
+DELIMITER $$
+CREATE PROCEDURE `property_remove`(IN `id` INT)
+DELETE FROM property WHERE PropertyID=id$$
+DELIMITER ;
+

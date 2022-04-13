@@ -98,10 +98,6 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']) && ($_SESSION['Typ
             </div>
                 </br>
                 <div class="col text-center">
-                    <button class="btn btn-secondary btn-rounded">Upload Image</button>
-                </div>
-                </br>
-                <div class="col text-center">
                     <button type='submit' name='ListProp' id='ListProp' class="btn btn-primary btn-rounded">List Property</button>
                 </div>
             </div>

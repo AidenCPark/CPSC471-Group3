@@ -100,7 +100,6 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
                         </div>
                     </div>
 
-                <option value="<?php echo $row[0];?>"><?php echo $row[0];?></option>
                 <?php endwhile;?>
 
                 </div>
