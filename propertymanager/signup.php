@@ -28,7 +28,7 @@
         <h2 class="text-center">Sign Up</h2>
         <div class="container" style="font-family: 'Signika', sans-serif">
           <form
-            action='connect.php'
+            action='api_signup.php'
             method="POST"
             style="
               padding: 5%;

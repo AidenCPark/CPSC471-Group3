@@ -24,6 +24,11 @@ SELECT * FROM appointment WHERE RealtorID = id$$
 DELIMITER ;
 
 DELIMITER $$
+CREATE PROCEDURE `appointment_remove`(IN `id` INT)
+DELETE FROM appointment WHERE AppointmentID=id$$
+DELIMITER ;
+
+DELIMITER $$
 CREATE PROCEDURE `property`()
 SELECT * FROM property$$
 DELIMITER ;
@@ -36,6 +41,16 @@ DELIMITER ;
 DELIMITER $$
 CREATE PROCEDURE `property_get`(IN `id` INT)
 SELECT * FROM property WHERE PropertyID=id$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `property_remove`(IN `id` INT)
+DELETE FROM property WHERE PropertyID=id$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE PROCEDURE `property_search`(IN `minprice` INT, IN `maxprice` INT, IN `floors` INT, IN `bedrooms` INT, IN `bathrooms` INT)
+SELECT * FROM property WHERE Price>=minprice AND Price <=maxprice AND NumOfFloors=floors AND NumOfBedrooms=bedrooms AND NumOfBathrooms=bathrooms$$
 DELIMITER ;
 
 DELIMITER $$
@@ -64,17 +79,11 @@ SELECT * FROM person WHERE Username=un$$
 DELIMITER ;
 
 DELIMITER $$
+CREATE PROCEDURE `user_id`(IN `id` INT)
+SELECT * FROM person WHERE UserID=id$$
+DELIMITER ;
+
+DELIMITER $$
 CREATE PROCEDURE `user_select`(IN `un` VARCHAR(255), IN `pw` VARCHAR(255))
 SELECT * FROM person WHERE Username=un AND Password=pw$$
 DELIMITER ;
-
-DELIMITER $$
-CREATE PROCEDURE `property_search`(IN `minprice` INT, IN `maxprice` INT, IN `floors` INT, IN `bedrooms` INT, IN `bathrooms` INT)
-SELECT * FROM property WHERE Price>=minprice AND Price <=maxprice AND NumOfFloors=floors AND NumOfBedrooms=bedrooms AND NumOfBathrooms=bathrooms$$
-DELIMITER ;
-
-DELIMITER $$
-CREATE PROCEDURE `property_remove`(IN `id` INT)
-DELETE FROM property WHERE PropertyID=id$$
-DELIMITER ;
-

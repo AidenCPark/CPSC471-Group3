@@ -64,9 +64,125 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
                     </div>
                 </div>
 
+                <!-- Display Appointments (realtor) -->
+
+                <?php if ($_SESSION['Type'] == 'Realtor'): ?>
+
+                <?php
+                $conn= mysqli_connect('localhost', 'root', '', 'propertymanager') or die("Connection Failed:" .mysqli_connect_error());
+
+                $UserID = $_SESSION['UserID'];
+                $sql= "CALL appointment_realtor('$UserID')";
+
+                $query = mysqli_query($conn,$sql);
+
+                if(mysqli_num_rows($query)===0)
+                {
+                    echo 'You do not have any scheduled appointments.';
+                }
+                else
+                {
+                    echo 'Your scheduled appointments (click to dismiss):';
+                }
+
+                ?>
+
+
+                <div class="row">
+                <?php while($row = mysqli_fetch_array($query)):;?>
+
+                <?php 
+                $ClientID = $row[1];
+
+                $conn1= mysqli_connect('localhost', 'root', '', 'propertymanager') or die("Connection Failed:" .mysqli_connect_error());
+                $sql1= "CALL user_id('$ClientID')";
+                $query1 = mysqli_query($conn1,$sql1);
+                $Client = mysqli_fetch_row($query1);
+                ?>
+
+                <div class="col-md-4">
+
+                <a href="api_removeappointment.php?id=<?php echo $row[0];?>">
+
+                <br><br>
+                <?php echo $row[3];?> with <?php echo $Client[1];?>
+                <br>
+                Email: <?php echo $Client[2];?>
+                <br>
+                Phone: <?php echo $Client[3];?>
+
+                </a>
+
+                </div>
+
+                <?php endwhile;?>
+                </div>
+
+                <br><br><br>
+                <?php endif ?>
+
+
+                <!-- Display Appointments (client) -->
+
+                <?php if ($_SESSION['Type'] == 'Client'): ?>
+
+                <?php
+                $conn= mysqli_connect('localhost', 'root', '', 'propertymanager') or die("Connection Failed:" .mysqli_connect_error());
+
+                $UserID = $_SESSION['UserID'];
+                $sql= "CALL appointment_client('$UserID')";
+
+                $query = mysqli_query($conn,$sql);
+
+                if(mysqli_num_rows($query)===0)
+                {
+                    echo 'You do not have any scheduled appointments.';
+                }
+                else
+                {
+                    echo 'Your scheduled appointments (click to cancel):';
+                }
+
+                ?>
+
+
+                <div class="row">
+                <?php while($row = mysqli_fetch_array($query)):;?>
+
+                <?php 
+                $RealtorID = $row[2];
+
+                $conn2= mysqli_connect('localhost', 'root', '', 'propertymanager') or die("Connection Failed:" .mysqli_connect_error());
+                $sql2= "CALL user_id('$RealtorID')";
+                $query2 = mysqli_query($conn2,$sql2);
+                $Realtor = mysqli_fetch_row($query2);
+                ?>
+
+                <div class="col-md-4">
+
+                <a href="api_removeappointment.php?id=<?php echo $row[0];?>">
+
+                <br><br>
+                <?php echo $row[3];?> with <?php echo $Realtor[1];?>
+                <br>
+                Email: <?php echo $Realtor[2];?>
+                <br>
+                Phone: <?php echo $Realtor[3];?>
+
+                </a>
+
+                </div>
+
+                <?php endwhile;?>
+                </div>
+
+                <br><br><br>
+                <?php endif ?>
+
+                <!-- Display Properties -->
+
                 <?php
 
-                // Connect to database: return error if can't connect
                 $conn= mysqli_connect('localhost', 'root', '', 'propertymanager') or die("Connection Failed:" .mysqli_connect_error());
 
                 $sql= "CALL property()";
@@ -90,6 +206,9 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
                                 <p style="margin-bottom:0;"class="card-text"><?php echo $row[2];?></p>
                                 <p style="margin-bottom:0;"class="card-text">Bedrooms: <?php echo $row[7];?></p>
                                 <p class="card-text">Bathrooms: <?php echo $row[8];?></p>
+                                <?php if ($row[1] == $UserID): ?>
+                                <p class="card-text"><font color=green>You listed this property.</font></p>
+                                <?php endif ?>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
                                         <button type="button" onclick="window.location='product_view.php?id=<?php echo $row[0];?>'" class="btn btn-sm btn-outline-secondary">View</button>

@@ -50,7 +50,7 @@ CREATE TABLE `appointment` (
   `RealtorID` int(11) NOT NULL,
   `Date` varchar(255) NOT NULL,
   PRIMARY KEY (`AppointmentID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -59,7 +59,7 @@ CREATE TABLE `appointment` (
 
 LOCK TABLES `appointment` WRITE;
 /*!40000 ALTER TABLE `appointment` DISABLE KEYS */;
-INSERT INTO `appointment` VALUES (3,19,20,'2022-04-20'),(4,19,22,'2022-04-21');
+INSERT INTO `appointment` VALUES (4,19,22,'2022-04-21'),(6,19,20,'2022-04-14'),(8,19,20,'2022-04-16'),(9,19,20,'2022-04-17'),(11,19,20,'2022-04-19');
 /*!40000 ALTER TABLE `appointment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -196,7 +196,7 @@ CREATE TABLE `person` (
   `Password` varchar(255) NOT NULL,
   `Type` varchar(255) NOT NULL,
   PRIMARY KEY (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -227,7 +227,7 @@ CREATE TABLE `property` (
   `NumOfBedrooms` int(11) NOT NULL,
   `NumOfBathrooms` int(11) NOT NULL,
   PRIMARY KEY (`PropertyID`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -236,7 +236,7 @@ CREATE TABLE `property` (
 
 LOCK TABLES `property` WRITE;
 /*!40000 ALTER TABLE `property` DISABLE KEYS */;
-INSERT INTO `property` VALUES (6,20,'123 University Dr.',200000,'Apartment','For Sale',1,1,1),(7,20,'987 Aurora Dr. NW',550000,'Duplex','For Sale',2,3,3),(8,20,'555 Example Blvd.',1000000,'Mansion','Conditionally Sold',3,5,7),(9,22,'3024 Smithfield Avenue',50000,'Shed','For Sale',1,1,0),(10,22,'2204 28 Avenue SW',869000,'Duplex','For Sale',2,3,4),(11,22,'1305, 881 Sage Valley Boulevard NW',349900,'Townhouse','For Sale',3,2,2);
+INSERT INTO `property` VALUES (6,20,'123 University Dr.',250000,'Apartment','For Sale',1,1,1),(7,20,'987 Aurora Dr. NW',550000,'Duplex','For Sale',2,3,3),(8,20,'555 Example Blvd.',1000000,'Mansion','Conditionally Sold',3,5,7),(9,22,'3024 Smithfield Avenue',50050,'Shed','For Sale',1,1,0),(10,22,'2204 28 Avenue SW',869000,'Duplex','For Sale',2,3,4),(11,22,'1305, 881 Sage Valley Boulevard NW',349900,'Townhouse','For Sale',3,2,2);
 /*!40000 ALTER TABLE `property` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -294,4 +294,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-12 20:40:22
+-- Dump completed on 2022-04-13 17:45:24

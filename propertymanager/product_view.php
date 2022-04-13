@@ -207,7 +207,7 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
         <h3 class="box-title mt-5" style="text-align:left;">Edit Property</h3>
         <br>
 
-        <form action="connect.php" method="POST" style="">
+        <form action="api_editproperty.php" method="POST" style="">
 
         <input name="PropertyID" type="hidden" id="PropertyID" value="<?php echo $PropertyID ?>" ></input>
         <input name="RealtorID" type="hidden" id="RealtorID" value="<?php echo $RealtorID ?>" ></input>

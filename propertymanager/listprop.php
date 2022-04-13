@@ -58,7 +58,7 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']) && ($_SESSION['Typ
         <h2 class="text-center">Create Property Listing</h2>
         <div class="container" style="font-family: 'Signika', sans-serif">
           <form
-            action="connect.php"
+            action="api_listproperty.php"
             method="POST"
             style="
               padding: 5%;
