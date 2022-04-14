@@ -65,7 +65,7 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE `user`()
-SELECT * FROM person$$
+SELECT UserID, Name, Email, Phone, Username, Type FROM person$$
 DELIMITER ;
 
 DELIMITER $$
