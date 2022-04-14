@@ -14,8 +14,8 @@ SELECT * FROM appointment WHERE ClientID = id$$
 DELIMITER ;
 
 DELIMITER $$
-CREATE PROCEDURE `appointment_date`(IN `date` VARCHAR(255))
-SELECT * FROM appointment WHERE Date = date$$
+CREATE PROCEDURE `appointment_date`(IN `day` VARCHAR(255))
+SELECT * FROM appointment WHERE Date = day$$
 DELIMITER ;
 
 DELIMITER $$
@@ -80,7 +80,7 @@ DELIMITER ;
 
 DELIMITER $$
 CREATE PROCEDURE `user_id`(IN `id` INT)
-SELECT * FROM person WHERE UserID=id$$
+SELECT UserID, Name, Email, Phone, Username, Type FROM person WHERE UserID=id$$
 DELIMITER ;
 
 DELIMITER $$

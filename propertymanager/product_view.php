@@ -88,7 +88,7 @@ if(isset($_SESSION['UserID']) && isset($_SESSION['Username']))
                 <?php if ($_SESSION['Type'] == 'Client'): ?>
 
                   <form
-                  action="api_appointment.php"
+                  action="api_addappointment.php"
                   method="POST"
                   style=""
                 >

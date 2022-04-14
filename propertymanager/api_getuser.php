@@ -3,20 +3,32 @@ header("Content-Type:application/json");
 
 $conn= mysqli_connect('localhost', 'root', '', 'propertymanager') or die("Connection Failed:" .mysqli_connect_error());
 
-$sql= "CALL appointment()";
-$query = mysqli_query($conn,$sql);
+if(!empty($_GET['id']))
+{
+	$id=$_GET['id'];
+	$sql= "CALL user_id('$id')";
+    $query = mysqli_query($conn,$sql);
+	
+	$row = mysqli_fetch_assoc($query);
 
-while($row = mysqli_fetch_assoc($query)) {
-    $result[] = array(
-        'AppointmentID'    => $row['AppointmentID'],
-        'ClientID'   => $row['ClientID'],
-        'RealtorID'     => $row['RealtorID'],
-        'Date'     => $row['Date'],
-    );
+    if($row == null)
+    {
+        response(200,"No user exists with that ID.", $row);
+    }
+    else
+    {
+        response(200,"Outputting user info.", $row);
+    }
+
+    
+	
+}
+else
+{
+	response(400,"Invalid Request",NULL);
 }
 
 
-response(200,"Outputting all appointments.",$result);
 
 
 
