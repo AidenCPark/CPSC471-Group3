@@ -34,6 +34,7 @@ CREATE TABLE `admin` (
 
 LOCK TABLES `admin` WRITE;
 /*!40000 ALTER TABLE `admin` DISABLE KEYS */;
+INSERT INTO `admin` VALUES (21);
 /*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -50,7 +51,7 @@ CREATE TABLE `appointment` (
   `RealtorID` int(11) NOT NULL,
   `Date` varchar(255) NOT NULL,
   PRIMARY KEY (`AppointmentID`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -59,7 +60,7 @@ CREATE TABLE `appointment` (
 
 LOCK TABLES `appointment` WRITE;
 /*!40000 ALTER TABLE `appointment` DISABLE KEYS */;
-INSERT INTO `appointment` VALUES (4,19,22,'2022-04-21'),(6,19,20,'2022-04-14'),(8,19,20,'2022-04-16'),(9,19,20,'2022-04-17'),(11,19,20,'2022-04-19');
+INSERT INTO `appointment` VALUES (14,28,20,'2022-04-15');
 /*!40000 ALTER TABLE `appointment` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -105,6 +106,7 @@ CREATE TABLE `client` (
 
 LOCK TABLES `client` WRITE;
 /*!40000 ALTER TABLE `client` DISABLE KEYS */;
+INSERT INTO `client` VALUES (19);
 /*!40000 ALTER TABLE `client` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -129,31 +131,6 @@ CREATE TABLE `email` (
 LOCK TABLES `email` WRITE;
 /*!40000 ALTER TABLE `email` DISABLE KEYS */;
 /*!40000 ALTER TABLE `email` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `image`
---
-
-DROP TABLE IF EXISTS `image`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `image` (
-  `ImageID` int(11) NOT NULL AUTO_INCREMENT,
-  `Name` varchar(255) NOT NULL,
-  `Description` varchar(255) NOT NULL,
-  `Property` int(11) NOT NULL,
-  PRIMARY KEY (`ImageID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `image`
---
-
-LOCK TABLES `image` WRITE;
-/*!40000 ALTER TABLE `image` DISABLE KEYS */;
-/*!40000 ALTER TABLE `image` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -196,7 +173,7 @@ CREATE TABLE `person` (
   `Password` varchar(255) NOT NULL,
   `Type` varchar(255) NOT NULL,
   PRIMARY KEY (`UserID`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -205,7 +182,7 @@ CREATE TABLE `person` (
 
 LOCK TABLES `person` WRITE;
 /*!40000 ALTER TABLE `person` DISABLE KEYS */;
-INSERT INTO `person` VALUES (19,'Aiden','aiden@gmail.com','587-111-1111','aiden','password','Client'),(20,'Stalin','stalin@gmail.com','403-111-1111','stalin','password','Realtor'),(21,'Scott','scott@gmail.com','403-111-1111','scott','password','Admin'),(22,'Joe','joe@gmail.com','123-456-7890','joe','password','Realtor');
+INSERT INTO `person` VALUES (19,'Aiden','aiden@gmail.com','587-111-1111','aiden','password','Client'),(20,'Stalin','stalin@gmail.com','403-111-1111','stalin','password','Realtor'),(21,'Scott','scott@gmail.com','403-111-1111','scott','password','Admin'),(22,'Joe','joe@gmail.com','123-456-7890','joe','password','Realtor'),(27,'New Guy','guy@gmail.com','123-456-1234','guy1','password','Realtor'),(28,'Person','person@gmail.com','987-654-3210','person','password','Client');
 /*!40000 ALTER TABLE `person` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -227,7 +204,7 @@ CREATE TABLE `property` (
   `NumOfBedrooms` int(11) NOT NULL,
   `NumOfBathrooms` int(11) NOT NULL,
   PRIMARY KEY (`PropertyID`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -236,7 +213,7 @@ CREATE TABLE `property` (
 
 LOCK TABLES `property` WRITE;
 /*!40000 ALTER TABLE `property` DISABLE KEYS */;
-INSERT INTO `property` VALUES (6,20,'123 University Dr.',250000,'Apartment','For Sale',1,1,1),(7,20,'987 Aurora Dr. NW',550000,'Duplex','For Sale',2,3,3),(8,20,'555 Example Blvd.',1000000,'Mansion','Conditionally Sold',3,5,7),(9,22,'3024 Smithfield Avenue',50050,'Shed','For Sale',1,1,0),(10,22,'2204 28 Avenue SW',869000,'Duplex','For Sale',2,3,4),(11,22,'1305, 881 Sage Valley Boulevard NW',349900,'Townhouse','For Sale',3,2,2);
+INSERT INTO `property` VALUES (6,20,'123 University Dr.',250000,'Apartment','For Sale',1,1,1),(7,20,'987 Aurora Dr. NW',550000,'Duplex','For Sale',2,3,3),(9,22,'3024 Smithfield Avenue',50050,'Shed','For Sale',1,1,0),(11,22,'1305, 881 Sage Valley Boulevard NW',349900,'Townhouse','For Sale',3,2,2),(17,27,'456 Test Rd.',333333,'Apartment','For Sale',2,3,3);
 /*!40000 ALTER TABLE `property` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -282,6 +259,7 @@ CREATE TABLE `realtor` (
 
 LOCK TABLES `realtor` WRITE;
 /*!40000 ALTER TABLE `realtor` DISABLE KEYS */;
+INSERT INTO `realtor` VALUES (20,'TestBrokerage'),(22,'TestBrokerage2');
 /*!40000 ALTER TABLE `realtor` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -294,4 +272,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-04-13 17:45:24
+-- Dump completed on 2022-04-15 16:54:12

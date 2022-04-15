@@ -5,7 +5,6 @@ $conn= mysqli_connect('localhost', 'root', '', 'propertymanager') or die("Connec
 
 $sql= "CALL user()";
 $query = mysqli_query($conn,$sql);
-$counter = 0;
 
 while($row = mysqli_fetch_assoc($query)) {
     $result[] = array(
